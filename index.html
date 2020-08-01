@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input id="displayRnumber" class="form-control" type="text">
+                    <button id="gererate-btnID"  class="generate-btn">Generate Pin</button>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="input-section half-width">
+                    <input id="calDisplay" class="form-control" type="text">
+                    <div class="numbers">
+                        <div class="calc-body">
+                            <div class="calc-button-row">
+                             
+                              <div id="buttonSeven" class="button">7</div>
+                              <div id="buttonEight" class="button">8</div>
+                              <div id="buttonNine" class="button">9</div>
+                            </div>
+
+                            <div class="calc-button-row">
+                              <div id="buttonFour" class="button">4</div>
+                              <div id="buttonFive" class="button">5</div>
+                              <div id="buttonSix" class="button">6</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div id="buttonOne" class="button">1</div>
+                              <div id="buttonTwo" class="button">2</div>
+                              <div id="buttonThree" class="button">3</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div id="buttonLeft" class="button"> < </div>
+                                <div id="buttonZero" class="button">0</div>
+                                <div id="buttonC" class="button">C</div>
+                            </div>
+                            <div>
+                                <button id="submitBtn" type="submit" class="submit-btn">Submit</button>
+                                <p id="action" class="action-left">3 try left</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notify-section">
+            <p id="PinCross" class="notify">❌ Pin Didn't Match, Please try again</p>
+            <p id="pinMAtch" class="notify">✅ Pin Matched... Secret door is opening for you</p>
+        </div>
+    </div>
+</body>
+
+
+<script>
+
+////// Pin Generate Area /////////
+
+const gnrt_btn=document.getElementById("gererate-btnID");
+gnrt_btn.addEventListener("click",function(){
+    
+    const val = Math.floor(1000 + Math.random() * 9000);    
+    const screem=document.getElementById("displayRnumber").value=val;
+
+    /////////// Pin Condition Area //////////////
+
+    const sub_btn=document.getElementById("submitBtn");
+    sub_btn.addEventListener("click",function(){
+
+        const calscreen=document.getElementById("calDisplay").value;
+        const calValue=parseFloat(calscreen);
+
+        if(val==calValue){
+            const pinMatch=document.getElementById("pinMAtch");
+            pinMatch.style.display="block"
+            
+        }else{
+
+            const pincross=document.getElementById("PinCross");
+            pincross.style.display="block"
+        
+         
+        }
+       
+        })
+   
+    })
+    
+      ///////// C Button Area /////////
+
+            const CBTn=document.getElementById("buttonC");
+            CBTn.addEventListener("click",function(){
+
+           const C_Btn='';
+           const display_two=document.getElementById("calDisplay").value=C_Btn;  
+
+            const pinMatch=document.getElementById("pinMAtch");
+            pinMatch.style.display="none"
+
+            //const pincross=document.getElementById("PinCross");
+            //pincross.style.display="none"
+
+            
+    })
+
+    const btnC=document.getElementById("buttonC");
+    btnC.addEventListener("click",function(){
+
+        const pincross=document.getElementById("PinCross");
+        pincross.style.display="none"
+
+
+    })
+
+////////////////////// < Button Area //////////
+
+
+        const LeftBTn=document.getElementById("buttonLeft");
+        LeftBTn.addEventListener("click",function(){
+        
+          const leftbtn=document.getElementById("calDisplay");
+          leftbtn.value=leftbtn.value.slice(0,-1);   
+
+           const pincross=document.getElementById("PinCross");
+           pincross.style.display="none" 
+
+           const pinMatch=document.getElementById("pinMAtch");
+            pinMatch.style.display="none"       
+
+    })
+       
+/////////// Calculator number Button Area ////////////
+
+    function buttonClick(id,value){
+        const AllCalButton=document.getElementById(id);
+        AllCalButton.addEventListener("click",function(){
+            const value_all=value;
+           const display_two=document.getElementById("calDisplay").value+=value_all;
+
+        })
+    }
+    
+    buttonClick("buttonOne",1);
+    buttonClick("buttonTwo",2);
+    buttonClick("buttonThree",3);
+    buttonClick("buttonFour",4);
+    buttonClick("buttonFive",5);
+    buttonClick("buttonSix",6);
+    buttonClick("buttonSeven",7);
+    buttonClick("buttonEight",8);
+    buttonClick("buttonNine",9);
+    buttonClick("buttonZero",0);  
+
+
+
+
+
+
+
+
+</script>
+
+</html>
